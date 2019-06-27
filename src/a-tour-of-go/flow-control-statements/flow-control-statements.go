@@ -23,13 +23,20 @@ func main() {
 	// x := 55.08
 	// simpleSwitch()
 	// usingTime()
-	fmt.Println(deferring())
+	// fmt.Println(deferring())
+	stackedDefers()
 	// anotherString := fmt.Sprint(tryingOutSprint("Michal", 27))
 	// t := fmt.Sprint(math.Sqrt(x))
 	// fmt.Println(t)
 	// pow(2, 20, 100000)
 }
 
+func stackedDefers() string {
+	for i := 0; i < 10; i++ {
+		fmt.Println(i)
+	}
+	return "OK!"
+}
 func forLoop(number int) int {
 	sum := 1
 	for sum < number {
