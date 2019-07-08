@@ -26,7 +26,94 @@ func main() {
 	// tryingOutRange()
 	// rangeContinued()
 	// exerciseFunction()
-	maps()
+	// maps()
+	// mutationMaps()
+	// hypot := func(x, y float64) float64 {
+	// 	return math.Sqrt(x*x + y*y)
+	// }
+	// fmt.Println(hypot(5, 12))
+
+	// fmt.Println(compute(hypot))
+	// fmt.Println(compute(math.Pow))
+	// functionClosure()
+	// wc.Test(WordCount)
+	// exerciseMaps("good morning Santa Barbara! I hope you are doing well")
+	f := fibonacci()
+	for i := 0; i < 10; i++ {
+		fmt.Println(f())
+	}
+}
+
+func fibonacci() func() int {
+	num0 := 0
+	num1 := 1
+	return func() int {
+		if num0 > num1 {
+			num1 = num0 + num1
+			return num1
+		} else {
+			num0 = num0 + num1
+			return num0
+		}
+
+	}
+}
+func adder() func(int) int {
+	sum := 0
+	return func(x int) int {
+		sum += x
+		return sum
+	}
+}
+func functionClosure() {
+	pos, neg := adder(), adder()
+	for i := 0; i < 10; i++ {
+		fmt.Println(
+			pos(i),
+			neg(-2*i),
+		)
+	}
+}
+func compute(fn func(float64, float64) float64) float64 {
+	return fn(3, 4)
+}
+func WordCount(s string) map[string]int {
+	// var word string = ""
+	// var inc int = 1
+	// var finalMap map[string]int
+
+	m := make(map[string]int)
+	a := strings.Fields(s)
+	for _, v := range a {
+		m[v]++
+	}
+	return m
+	// for l := 0; l < len(s); l++ {
+
+	// 	if string(s[l]) == " " {
+	// 		finalMap[word] = inc
+	// 		word = ""
+	// 		inc++
+	// 	} else {
+	// 		word = word + string(s[l])
+	// 	}
+	// }
+	// return finalMap
+}
+func mutationMaps() {
+	m := make(map[string]int)
+
+	m["Answer"] = 42
+	fmt.Println("The value:", m["Answer"])
+
+	m["Answer"] = 48
+	fmt.Println("The value:", m["Answer"])
+
+	delete(m, "Answer")
+	fmt.Println("The value:", m["Answer"])
+
+	v, ok := m["Answer"]
+	fmt.Println("The value:", v, "Present?", ok)
 }
 
 type Vertex2 struct {
@@ -35,11 +122,13 @@ type Vertex2 struct {
 
 func maps() {
 	var m map[string]Vertex2
-	var m2 map[float64]Vertex2
+	var m2 map[int64]Vertex2
 	fmt.Print(m2)
-	m = make(map[string]Vertex2)
-	m["Bell Labs"] = Vertex2{40.68433, -74.39967}
-	m["some location"] = Vertex2{40.0, -74.4}
+	m = map[string]Vertex2{
+		"Bell Labs":     {40.68433, -74.39967},
+		"some location": {40.0, -74.4},
+	}
+
 	fmt.Println(m)
 }
 
