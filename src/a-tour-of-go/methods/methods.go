@@ -21,8 +21,44 @@ func main() {
 	// a = &v2
 
 	// fmt.Println(a.Abs())
-	if err := run(); err != nil {
-		fmt.Println(err)
+	// if err := run(); err != nil {
+	// 	fmt.Println(err)
+	// }
+	// var it ErrNegativeSqrt = 33
+	fmt.Println(Sqrt(3334))
+	fmt.Println(Sqrt(-209))
+}
+
+type ErrNegativeSqrt float64
+
+func (e ErrNegativeSqrt) Error() string {
+	if e < 0 {
+		return "cannot Sqrt negative number"
+	} else {
+		num, _ := Sqrt(44.0)
+		s := fmt.Sprintf("%f", num)
+		return s
+	}
+}
+
+func Sqrt(x float64) (float64, string) {
+	if x < 0 {
+		return 0, ErrNegativeSqrt(x).Error()
+	} else {
+		guess := 1.0
+		inc := 1.0
+
+		for i := 0; i < 100; i++ {
+			if math.Pow(guess, 2) < x {
+				inc = inc / 2
+				guess += inc
+			} else {
+				inc = inc / 2
+				guess -= inc
+			}
+		}
+
+		return guess, ""
 	}
 }
 
